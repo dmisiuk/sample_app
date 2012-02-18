@@ -1,5 +1,5 @@
 .container {
-	width: 600px;
+	width: 700px;
 
 }
 
@@ -100,7 +100,7 @@ a.signup_button {
 footer {
   text-align: center;
   margin-top: 10px;
-  width: 600px;
+  width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -174,4 +174,12 @@ div.field, div.actions {
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+ul.users {
+  margin-top: 1em;
+}
+
+.users li {
+  list-style: none;
 }

@@ -81,7 +81,7 @@ describe User do
     end
 
     it "should reject a short password" do
-      short = "a"*5
+      short = "a"*4
       User.new(@attr.merge(:password => short, :password_confirmation => short)).
         should_not be_valid
     end
@@ -131,6 +131,27 @@ describe User do
         end
       end
     end
+  end
+
+  describe "admin attribute" do
+
+    before(:each) do
+      @user = User.create!(@attr)  
+    end
+
+    it "should respond to admin" do
+      @user.should respond_to(:admin)
+    end
+
+    it "should not be an admin by default" do
+      @user.should_not be_admin
+    end
+
+    it "should be convertible to an admin" do
+      @user.toggle!(:admin)
+      @user.should be_admin
+    end
+
   end
 end
 
