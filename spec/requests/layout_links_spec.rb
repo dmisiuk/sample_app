@@ -70,4 +70,39 @@ describe "LayoutLinks" do
                                           :content => "Profile")
     end
   end
+
+  describe "link delete" do
+
+    describe "for admin user" do
+      before(:each) do
+        admin = Factory(:user, :email => "admin@exampl.com", :admin => true)
+        visit signin_path
+        fill_in :email, :with => admin.email
+        fill_in :password, :with => admin.password
+        click_button
+      end
+
+      it "should have a 'delete' link" do
+        get '/users'
+        response.should have_selector('a', :content => 'delete')
+      end
+    end
+
+
+    describe "for non-admin user" do
+      before(:each) do
+        user = Factory(:user)
+        visit signin_path
+        fill_in :email, :with => user.email
+        fill_in :password, :with => user.password
+        click_button
+      end
+
+      it "should not have a 'delete' link" do
+        get '/users'
+        response.should_not have_selector('a', :content => 'delete')
+      end
+    end
+  end
+
 end

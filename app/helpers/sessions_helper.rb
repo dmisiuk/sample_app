@@ -26,6 +26,10 @@ module SessionsHelper
 		redirect_to signin_path, :notice => "Please sign in to access this page"
 	end
 
+	def deny_access_to_new
+		redirect_to root_path, :notice => "You can't sign up more"
+	end
+
 	def current_user?(user)
 		user == current_user
 	end

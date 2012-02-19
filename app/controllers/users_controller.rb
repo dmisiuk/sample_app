@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_filter :authenticate,  :only => [:edit, :update, :index, :destroy]
   before_filter :correct_user,  :only => [:edit, :update]
   before_filter :admin_user,    :only => [:destroy]
+  before_filter :noAuthenticate,:only => [:new, :create]
+
   def new
   	@user = User.new
   	@title = "Sign up"
@@ -52,6 +54,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def noAuthenticate
+      deny_access_to_new if signed_in?
+    end
 
     def authenticate
       deny_access unless signed_in?      
